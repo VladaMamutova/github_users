@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_users/src/ui/widgets/search_bar.dart';
+import 'package:github_users/src/ui/widgets/user_list.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -50,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         body: TabBarView(
             children: [
               Container(
+                child: UserList(),
               ),
               Container(
               ),
