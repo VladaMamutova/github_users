@@ -40,7 +40,6 @@ class UserListState extends State<UserList>{
   }
 
   _buildItem(User user, bool isFirst) {
-    print(user);
     return Container(
       child: Card(
         margin: EdgeInsets.fromLTRB(0, isFirst ? 10 : 0, 0, 0),

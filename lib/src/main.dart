@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:github_users/src/ui/pages/home_page.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 
-void main() {
+Future main() async {
+  // load environment variables (github client_id and client_secret)
+  await DotEnv.load(); // fileName: ".env" - by default, so
   runApp(MyApp());
 }
 
