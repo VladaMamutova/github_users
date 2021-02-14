@@ -23,10 +23,7 @@ class UserListState extends State<UserList>{
       } else if (snapshot.hasError) {
         return Text(snapshot.error.toString());
       }
-      return Container(
-        padding: EdgeInsets.all(24),
-        child: Center(child: CircularProgressIndicator(),),
-      );
+      return Center(child: CircularProgressIndicator(),);
     });
   }
 
@@ -36,20 +33,60 @@ class UserListState extends State<UserList>{
         scrollDirection: Axis.vertical,
         itemCount: snapshot.data.users.length,
         itemBuilder: (BuildContext context, int index) {
-          return _buildItem(snapshot.data.users[index]);
+          return _buildItem(snapshot.data.users[index], index == 0);
         },
       ),
     );
   }
 
-  _buildItem(User user) {
+  _buildItem(User user, bool isFirst) {
     print(user);
-    return ListTile(
-       title: Text(user.login),
-       subtitle: Text('${user.followers} / ${user.following}'),
-       leading: CircleAvatar(
-         child: Image.network(
-           user.avatarUrl),
+    return Container(
+      child: Card(
+        margin: EdgeInsets.fromLTRB(0, isFirst ? 10 : 0, 0, 0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0.0),
+        ),
+        elevation: 0,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 10, 24, 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width * 0.2,
+                  maxHeight: MediaQuery.of(context).size.width * 0.2,
+                ),
+                child:  Image.network(
+                  user.avatarUrl,
+                  fit: BoxFit.fill,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, top: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(user.login,
+                      style:  TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 26
+                      ),
+                    ),
+                    SizedBox(height: 8,),
+                    Text('${user.followers} / ${user.following}',
+                      style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 18
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

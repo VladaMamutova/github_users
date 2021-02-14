@@ -5,7 +5,7 @@ class User {
   int following;
   String url;
 
-  User({login, avatarUrl, followers, following, url});  // {} - for named optional parameters
+  User({this.login, this.avatarUrl, this.followers, this.following, this.url});  // {} - for named optional parameters
 
   @override
   String toString() {
