@@ -12,30 +12,46 @@ class UserList extends StatefulWidget {
 }
 
 class UserListState extends State<UserList>{
+  final _users = <User>[];
+  int page = 0;
+  bool hasReachedMax = false;
+
   @override
   Widget build(BuildContext context) {
-    usersBloc.fetchUsers();
+    usersBloc.fetchUsers(page);
     return StreamBuilder(
         stream: usersBloc.allUsers,
         builder: (context, AsyncSnapshot<UsersModel> snapshot) {
       if (snapshot.hasData) {
-        return buildContent(context, snapshot);
+        return _buildContent(context, snapshot);
       } else if (snapshot.hasError) {
         return Text(snapshot.error.toString());
+      } else {
+        return Center(child: CircularProgressIndicator(),);
       }
-      return Center(child: CircularProgressIndicator(),);
     });
   }
 
-  Widget buildContent(BuildContext context, AsyncSnapshot snapshot) {
+  Widget _buildContent(BuildContext context, AsyncSnapshot snapshot) {
+    if (snapshot.data.users.isEmpty) {
+      hasReachedMax = true;
+    } else {
+      _users.addAll(snapshot.data.users);
+    }
+
     return Container(
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: snapshot.data.users.length,
-        itemBuilder: (BuildContext context, int index) {
-          return _buildItem(snapshot.data.users[index], index == 0);
-        },
-      ),
+        child: ListView.builder( // analog of RecyclerView in Android
+            itemCount: hasReachedMax ? _users.length : _users.length + 1,
+            itemBuilder: (BuildContext context, int index) {
+              if (index < _users.length) {
+                return _buildItem(_users[index], index == 0);
+              } else {
+                page++;
+                usersBloc.fetchUsers(page);
+                return Center(child: CircularProgressIndicator());
+              }
+            }
+            )
     );
   }
 

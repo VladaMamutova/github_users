@@ -5,8 +5,8 @@ import 'package:rxdart/rxdart.dart';
 class UsersBloc extends BlocBase<UsersModel> {
   Observable<UsersModel> get allUsers => fetcher.stream;
 
-  fetchUsers() async {
-    UsersModel usersModel = await repository.fetchAllUsers();
+  fetchUsers(int page) async {
+    UsersModel usersModel = await repository.fetchUsers(page);
     fetcher.sink.add(usersModel);
   }
 }
