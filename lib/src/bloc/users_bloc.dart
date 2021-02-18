@@ -52,12 +52,12 @@ class UsersBloc extends BlocBase<UsersModel> {
     return user.name.startsWith(RegExp(r'[A-Ha-h]'));
   }
 
-  bool filterFromItoQ(User user) {
-    return user.name.startsWith(RegExp(r'[I-Qi-q]'));
+  bool filterFromItoP(User user) {
+    return user.name.startsWith(RegExp(r'[I-Pi-p]'));
   }
 
-  bool filterFromPtoZ(User user) {
-    return user.name.startsWith(RegExp(r'[P-Zp-z]'));
+  bool filterFromQtoZ(User user) {
+    return user.name.startsWith(RegExp(r'[Q-Zq-z]'));
   }
 }
 

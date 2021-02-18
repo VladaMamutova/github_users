@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:github_users/src/bloc/users_bloc.dart';
 import 'package:github_users/src/model/user.dart';
 import 'package:github_users/src/model/users_model.dart';
+import 'package:github_users/src/ui/widgets/user_item.dart';
 
 class UserList extends StatefulWidget {
   final Function(User) filter;
@@ -51,64 +52,13 @@ class UserListState extends State<UserList>{
                 if (widget._users[index] == null) {
                   print("null on index = $index");
                 }
-                return _buildItem(widget._users[index], index == 0);
+                return UserItem(widget._users[index], index == 0);
               } else {
                 usersBloc.fetchUsers();
                 return Center(child: CircularProgressIndicator());
               }
             }
             )
-    );
-  }
-
-  _buildItem(User user, bool isFirst) {
-    return Container(
-      child: Card(
-        margin: EdgeInsets.fromLTRB(0, isFirst ? 10 : 0, 0, 0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(0.0),
-        ),
-        elevation: 0,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 10, 24, 10),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width * 0.2,
-                  maxHeight: MediaQuery.of(context).size.width * 0.2,
-                ),
-                child:  Image.network(
-                  user.avatarUrl,
-                  fit: BoxFit.fill,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, top: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(user.name,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                      ),
-                    ),
-                    SizedBox(height: 8,),
-                    Text('${user.followers} / ${user.following}',
-                      style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 18
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

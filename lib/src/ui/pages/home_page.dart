@@ -31,8 +31,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   SizedBox(height: 12),
                   SearchBar(),
-                  new SizedBox(height: 12),
-                  new TabBar(
+                  SizedBox(height: 12),
+                  TabBar(
                     indicatorWeight: 3,
                     labelColor: Color(0xff2D2727),
                     labelStyle: TextStyle(
@@ -41,8 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     tabs: [
                       Tab(text: "A - H"),
-                      Tab(text: "I - Q"),
-                      Tab(text: "P - Z")
+                      Tab(text: "I - P"),
+                      Tab(text: "Q - Z")
                     ],
                   ),
                 ],
@@ -52,15 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: TabBarView(
             children: [
-              Container(
-                child: UserList(usersBloc.filterFromAtoH),
-              ),
-              Container(
-                child: UserList(usersBloc.filterFromItoQ),
-              ),
-              Container(
-                child: UserList(usersBloc.filterFromPtoZ),
-              ),
+              UserList(usersBloc.filterFromAtoH),
+              UserList(usersBloc.filterFromItoP),
+              UserList(usersBloc.filterFromQtoZ),
             ]),
       ),
     );
