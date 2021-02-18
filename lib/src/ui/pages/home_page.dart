@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:github_users/src/ui/widgets/search_bar.dart';
 import 'package:github_users/src/ui/widgets/user_list.dart';
+import 'package:github_users/src/bloc/users_bloc.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: new Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(166),
+          preferredSize: Size.fromHeight(154),
           child: new AppBar(
             backgroundColor: Colors.white,
             flexibleSpace:
@@ -52,11 +53,13 @@ class _MyHomePageState extends State<MyHomePage> {
         body: TabBarView(
             children: [
               Container(
-                child: UserList(),
+                child: UserList(usersBloc.filterFromAtoH),
               ),
               Container(
+                child: UserList(usersBloc.filterFromItoQ),
               ),
               Container(
+                child: UserList(usersBloc.filterFromPtoZ),
               ),
             ]),
       ),

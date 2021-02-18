@@ -1,20 +1,16 @@
 class User {
   String login;
+  String name;
   String avatarUrl;
   int followers;
   int following;
 
-  User({this.login, this.avatarUrl, this.followers, this.following});  // {} - for named optional parameters
+  User({this.login = '', this.name = '', this.avatarUrl = '',
+    this.followers = 0, this.following = 0});  // {} - for named optional parameters
 
   @override
   String toString() {
-    return 'User{login: $login, avatarUrl: $avatarUrl, followers: $followers, following: $following}';
-  }
-
-  User.fromJson(Map<String, dynamic> json) {
-    login = json['login'] as String;
-    avatarUrl = json['avatar_url'] as String;
-    followers = 0;
-    following = 0;
+    return 'User{login: $login, name: $name, avatarUrl: $avatarUrl, '
+        'followers: $followers, following: $following}';
   }
 }

@@ -5,6 +5,11 @@ import 'package:github_users/src/model/user.dart';
 import 'package:github_users/src/model/users_model.dart';
 
 class UserList extends StatefulWidget {
+  final Function(User) filter;
+  final _users = <User>[];
+
+  UserList(this.filter);
+
   @override
   State<StatefulWidget> createState() {
     return UserListState();
@@ -12,42 +17,43 @@ class UserList extends StatefulWidget {
 }
 
 class UserListState extends State<UserList>{
-  final _users = <User>[];
-  int page = 0;
-  bool hasReachedMax = false;
-
   @override
   Widget build(BuildContext context) {
-    usersBloc.fetchUsers(page);
+    // load users from an unfiltered list after switching tabs
+    widget._users.addAll(usersBloc.getFromUnfiltered(widget.filter));
+    if (widget._users.isEmpty) {
+      usersBloc.fetchUsers();
+    }
+
     return StreamBuilder(
-        stream: usersBloc.allUsers,
+        stream: usersBloc.gitFilteredUsers(widget.filter),
         builder: (context, AsyncSnapshot<UsersModel> snapshot) {
-      if (snapshot.hasData) {
-        return _buildContent(context, snapshot);
-      } else if (snapshot.hasError) {
-        return Text(snapshot.error.toString());
-      } else {
-        return Center(child: CircularProgressIndicator(),);
-      }
-    });
+          if (snapshot.hasData || widget._users.isNotEmpty) {
+            return _buildContent(context, snapshot);
+          } else if (snapshot.hasError) {
+            return Text(snapshot.error.toString());
+          } else {
+            return Center(child: CircularProgressIndicator(),);
+          }
+        });
   }
 
   Widget _buildContent(BuildContext context, AsyncSnapshot snapshot) {
-    if (snapshot.data.users.isEmpty) {
-      hasReachedMax = true;
-    } else {
-      _users.addAll(snapshot.data.users);
+    if (snapshot.hasData && !usersBloc.hasReachedMax) {
+      widget._users.addAll(snapshot.data.users);
     }
 
     return Container(
         child: ListView.builder( // analog of RecyclerView in Android
-            itemCount: hasReachedMax ? _users.length : _users.length + 1,
+            itemCount: usersBloc.hasReachedMax ? widget._users.length : widget._users.length + 1,
             itemBuilder: (BuildContext context, int index) {
-              if (index < _users.length) {
-                return _buildItem(_users[index], index == 0);
+              if (index < widget._users.length) {
+                if (widget._users[index] == null) {
+                  print("null on index = $index");
+                }
+                return _buildItem(widget._users[index], index == 0);
               } else {
-                page++;
-                usersBloc.fetchUsers(page);
+                usersBloc.fetchUsers();
                 return Center(child: CircularProgressIndicator());
               }
             }
@@ -83,10 +89,10 @@ class UserListState extends State<UserList>{
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(user.login,
-                      style:  TextStyle(
+                    Text(user.name,
+                      style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 26
+                          fontSize: 20,
                       ),
                     ),
                     SizedBox(height: 8,),
