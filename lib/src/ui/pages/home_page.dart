@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:github_users/src/ui/widgets/search_bar.dart';
+import 'package:github_users/src/ui/pages/search_page.dart';
+import 'package:github_users/src/ui/widgets/search_card.dart';
 import 'package:github_users/src/ui/widgets/user_list.dart';
 import 'package:github_users/src/bloc/users_bloc.dart';
 
@@ -16,7 +17,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: new Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(154),
+          preferredSize: Size.fromHeight(153),
           child: new AppBar(
             backgroundColor: Colors.white,
             flexibleSpace:
@@ -30,7 +31,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: Theme.of(context).textTheme.headline5,
                   ),
                   SizedBox(height: 12),
-                  SearchBar(),
+                  SearchCard(onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => SearchPage()));
+                  },),
                   SizedBox(height: 12),
                   TabBar(
                     indicatorWeight: 3,
