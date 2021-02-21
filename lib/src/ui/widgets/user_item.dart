@@ -6,7 +6,7 @@ class UserItem extends StatelessWidget {
   final User _user;
   final bool _isFirst;
 
-  UserItem (this._user, this._isFirst);
+  UserItem(this._user, this._isFirst);
 
   @override
   Widget build(BuildContext context) {
@@ -24,33 +24,35 @@ class UserItem extends StatelessWidget {
             children: [
               ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width * 0.2,
-                  maxHeight: MediaQuery.of(context).size.width * 0.2,
+                  maxWidth: MediaQuery.of(context).size.width * 0.22,
+                  maxHeight: MediaQuery.of(context).size.width * 0.22,
                 ),
-                child:  Image.network(
+                child: Image.network(
                   _user.avatarUrl,
                   fit: BoxFit.fill,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16, top: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(_user.name,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16, top: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(_user.name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 8,),
-                    Text('${_user.followers} / ${_user.following}',
-                      style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 18
+                      SizedBox(height: 4,),
+                      Text('${_user.followers} / ${_user.following}',
+                        style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 18
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

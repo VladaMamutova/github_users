@@ -4,6 +4,7 @@ import 'model_base.dart';
 class UsersModel extends ModelBase {
   List<User> users;
   int lastId = 0;
+  int totalResults = 0;
 
   UsersModel(List<User> _users) {
     users = _users;

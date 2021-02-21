@@ -3,7 +3,7 @@ import 'package:github_users/src/model/user.dart';
 import 'package:github_users/src/model/users_model.dart';
 import 'package:rxdart/rxdart.dart';
 
-class UsersBloc extends BlocBase<UsersModel> {
+class UserListBloc extends BlocBase<UsersModel> {
   int _startId = 0; // '_' for private, int = 2^63
   bool _hasReachedMax = false;
   List<User> _unfilteredUsers = List<User>();
@@ -13,12 +13,12 @@ class UsersBloc extends BlocBase<UsersModel> {
 
   fetchUsers() async {
     UsersModel usersModel = await repository.fetchUsers(_startId);
-    if (usersModel.users.isNotEmpty) {
-      if (_startId != usersModel.lastId) {
-        _startId = usersModel.lastId;
-        fetcher.sink.add(usersModel);
-      }
-    } else {
+    if (_startId != usersModel.lastId) { // process only a new batch of users
+      _startId = usersModel.lastId;
+      fetcher.sink.add(usersModel);
+    }
+
+    if (usersModel.users.isEmpty) {
       _hasReachedMax = true;
     }
   }
@@ -36,7 +36,7 @@ class UsersBloc extends BlocBase<UsersModel> {
     return users;
   }
 
-  Observable<UsersModel> gitFilteredUsers(Function(User) filter) {
+  Observable<UsersModel> filterUsers(Function(User) filter) {
     return allUsers.map((model) =>
         UsersModel(model.users.where((user) {
           if (filter(user)) {
@@ -47,18 +47,6 @@ class UsersBloc extends BlocBase<UsersModel> {
           }
         }).toList()));
   }
-  
-  bool filterFromAtoH(User user) {
-    return user.name.startsWith(RegExp(r'[A-Ha-h]'));
-  }
-
-  bool filterFromItoP(User user) {
-    return user.name.startsWith(RegExp(r'[I-Pi-p]'));
-  }
-
-  bool filterFromQtoZ(User user) {
-    return user.name.startsWith(RegExp(r'[Q-Zq-z]'));
-  }
 }
 
-final usersBloc = UsersBloc();
+final userListBloc = UserListBloc();
