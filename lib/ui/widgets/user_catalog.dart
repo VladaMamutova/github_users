@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:github_users/src/bloc/user_catalog_bloc.dart';
-import 'package:github_users/src/model/user.dart';
-import 'package:github_users/src/model/users_model.dart';
-import 'package:github_users/src/ui/widgets/user_list.dart';
+import 'package:github_users/bloc/user_catalog_bloc.dart';
+import 'package:github_users/model/user.dart';
+import 'package:github_users/model/users_model.dart';
+import 'package:github_users/ui/widgets/user_list.dart';
 
 class UserCatalog extends UserList {
   final Function(User) filter;

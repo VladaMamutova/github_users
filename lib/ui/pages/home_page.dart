@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:github_users/src/bloc/user_catalog_bloc.dart';
-import 'package:github_users/src/bloc/user_search_bloc.dart';
-import 'package:github_users/src/model/user.dart';
-import 'package:github_users/src/ui/pages/search_page.dart';
-import 'package:github_users/src/ui/widgets/search_card.dart';
-import 'package:github_users/src/ui/widgets/user_catalog.dart';
+import 'package:github_users/bloc/user_catalog_bloc.dart';
+import 'package:github_users/bloc/user_search_bloc.dart';
+import 'package:github_users/model/user.dart';
+import 'package:github_users/ui/pages/search_page.dart';
+import 'package:github_users/ui/widgets/search_card.dart';
+import 'package:github_users/ui/widgets/user_catalog.dart';
 
 class MyHomePage extends StatefulWidget {
   @override

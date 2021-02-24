@@ -1,5 +1,5 @@
-import 'package:github_users/src/model/model_base.dart';
-import 'package:github_users/src/resources/repository.dart';
+import 'package:github_users/model/model_base.dart';
+import 'package:github_users/resources/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 abstract class BlocBase<T extends ModelBase> {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:github_users/src/ui/pages/home_page.dart';
+import 'package:github_users/ui/pages/home_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 import 'package:flutter/services.dart';
 

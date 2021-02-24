@@ -1,5 +1,5 @@
-import 'package:github_users/src/bloc/bloc_base.dart';
-import 'package:github_users/src/model/users_model.dart';
+import 'package:github_users/bloc/bloc_base.dart';
+import 'package:github_users/model/users_model.dart';
 import 'package:rxdart/rxdart.dart';
 
 abstract class UserListBloc extends BlocBase<UsersModel> {

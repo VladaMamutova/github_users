@@ -1,4 +1,4 @@
-import 'package:github_users/src/model/user.dart';
+import 'package:github_users/model/user.dart';
 import 'model_base.dart';
 
 class UsersModel extends ModelBase {

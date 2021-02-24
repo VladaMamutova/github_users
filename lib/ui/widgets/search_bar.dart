@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:github_users/src/bloc/searcher.dart';
-import 'package:github_users/src/bloc/text_bloc.dart';
+import 'package:github_users/bloc/searcher.dart';
+import 'package:github_users/bloc/text_bloc.dart';
 
 class SearchBar extends StatefulWidget {
   final Searcher searcher;

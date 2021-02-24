@@ -1,6 +1,6 @@
-import 'package:github_users/src/bloc/user_list_bloc.dart';
-import 'package:github_users/src/model/user.dart';
-import 'package:github_users/src/model/users_model.dart';
+import 'package:github_users/bloc/user_list_bloc.dart';
+import 'package:github_users/model/user.dart';
+import 'package:github_users/model/users_model.dart';
 import 'package:rxdart/rxdart.dart';
 
 class UserCatalogBloc extends UserListBloc {

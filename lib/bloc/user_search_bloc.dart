@@ -1,6 +1,6 @@
-import 'package:github_users/src/bloc/searcher.dart';
-import 'package:github_users/src/bloc/user_list_bloc.dart';
-import 'package:github_users/src/model/users_model.dart';
+import 'package:github_users/bloc/searcher.dart';
+import 'package:github_users/bloc/user_list_bloc.dart';
+import 'package:github_users/model/users_model.dart';
 
 class UserSearchBloc extends UserListBloc implements Searcher {
   String _searchName = "";

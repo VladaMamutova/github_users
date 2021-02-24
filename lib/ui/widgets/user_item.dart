@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:github_users/src/model/user.dart';
+import 'package:github_users/model/user.dart';
 
 class UserItem extends StatelessWidget {
   final User _user;

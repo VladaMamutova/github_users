@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:github_users/src/model/users_model.dart';
+import 'package:github_users/model/users_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 

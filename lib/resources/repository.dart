@@ -1,5 +1,5 @@
-import 'package:github_users/src/model/users_model.dart';
-import 'package:github_users/src/resources/github_api_provider.dart';
+import 'package:github_users/model/users_model.dart';
+import 'package:github_users/resources/github_api_provider.dart';
 
 class Repository {
   final _gitHubApiProvider = GitHubApiProvider();

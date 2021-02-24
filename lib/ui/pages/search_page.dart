@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:github_users/src/bloc/user_search_bloc.dart';
-import 'package:github_users/src/model/users_model.dart';
-import 'package:github_users/src/ui/widgets/search_bar.dart';
-import 'package:github_users/src/ui/widgets/user_list.dart';
+import 'package:github_users/bloc/user_search_bloc.dart';
+import 'package:github_users/model/users_model.dart';
+import 'package:github_users/ui/widgets/search_bar.dart';
+import 'package:github_users/ui/widgets/user_list.dart';
 
 class SearchPage extends UserList {
   SearchPage(UserSearchBloc userSearchBloc) : super(userSearchBloc);
