@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:github_users/src/bloc/user_catalog_bloc.dart';
+import 'package:github_users/src/bloc/user_search_bloc.dart';
 import 'package:github_users/src/model/user.dart';
 import 'package:github_users/src/ui/pages/search_page.dart';
 import 'package:github_users/src/ui/widgets/search_card.dart';
-import 'package:github_users/src/ui/widgets/user_list.dart';
+import 'package:github_users/src/ui/widgets/user_catalog.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -10,6 +12,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  UserCatalogBloc _userCatalogBloc = UserCatalogBloc();
+  UserSearchBloc _userSearchBloc = UserSearchBloc();
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -17,13 +22,14 @@ class _MyHomePageState extends State<MyHomePage> {
       child: new Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(157),
+          preferredSize: Size.fromHeight(169),
           child: new AppBar(
             backgroundColor: Colors.white,
             brightness: Brightness.light, // the values in the status bar are dark
             flexibleSpace: new Container(
               margin: const EdgeInsets.only(left: 12, top: 40, right: 12),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
                     "GitHub Users",
@@ -33,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   SizedBox(height: 8),
                   SearchCard(onTap: () {
                     Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => SearchPage()));
+                        MaterialPageRoute(builder: (context) => SearchPage(_userSearchBloc)));
                     },
                   ),
                   SizedBox(height: 8),
@@ -57,9 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: TabBarView(
             children: [
-              UserList(User.filterFromAtoH),
-              UserList(User.filterFromItoP),
-              UserList(User.filterFromQtoZ),
+              UserCatalog(_userCatalogBloc, User.filterFromAtoH),
+              UserCatalog(_userCatalogBloc, User.filterFromItoP),
+              UserCatalog(_userCatalogBloc, User.filterFromQtoZ),
             ]),
       ),
     );

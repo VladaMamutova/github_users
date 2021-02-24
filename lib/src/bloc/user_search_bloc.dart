@@ -1,8 +1,8 @@
-import 'package:github_users/src/bloc/bloc_base.dart';
+import 'package:github_users/src/bloc/searcher.dart';
+import 'package:github_users/src/bloc/user_list_bloc.dart';
 import 'package:github_users/src/model/users_model.dart';
-import 'package:rxdart/rxdart.dart';
 
-class UserSearchBloc extends BlocBase<UsersModel> {
+class UserSearchBloc extends UserListBloc implements Searcher {
   String _searchName = "";
   int _page = 0;
   int _fetchedResults = 0;
@@ -10,14 +10,11 @@ class UserSearchBloc extends BlocBase<UsersModel> {
   int _lastTime = DateTime.now().millisecondsSinceEpoch;
   bool _isSearching = false;
 
-  Observable<UsersModel> get foundUsers => fetcher.stream;
   int get totalResults => _totalResults;
   bool get isFirstPage => _page == 1;
-  bool get hasReachedMax => _fetchedResults == _totalResults;
   bool get isSearching => _isSearching;
 
-
-  _resetSearchData() {
+  _resetSearchOptions() {
     fetcher.take(_fetchedResults);
     _searchName = "";
     _page = 0;
@@ -25,13 +22,20 @@ class UserSearchBloc extends BlocBase<UsersModel> {
     _totalResults = 0;
   }
 
-  searchUsersByName(String name) async {
+  @override
+  loadUsers() {
+    searchByName(_searchName);
+  }
+
+
+  @override
+  searchByName(String name) async {
     if (name != _searchName) {
-      _resetSearchData();
+      _resetSearchOptions();
       _searchName = name;
     }
 
-    if (_page == 0 || !hasReachedMax) {
+    if (_page == 0 || !allLoaded) {
       _isSearching = true;
       int startTime = DateTime.now().millisecondsSinceEpoch;
       UsersModel usersModel = await repository.searchUsersByName(_searchName, _page + 1);
@@ -40,34 +44,32 @@ class UserSearchBloc extends BlocBase<UsersModel> {
         _lastTime = startTime;
         _fetchedResults += usersModel.users.length;
         _totalResults = usersModel.totalResults;
+        setLoaded(_fetchedResults == _totalResults);
         fetcher.sink.add(usersModel);
       }
       _isSearching = false;
     }
   }
 
-  searchMore() {
-    searchUsersByName(_searchName);
-  }
-
+  @override
   resetSearch() {
     _lastTime = DateTime.now().millisecondsSinceEpoch;
-    _resetSearchData();
+    _resetSearchOptions();
   }
 
-  notifyLoading() {
+  @override
+  notifyStartSearching() {
     if (!_isSearching) {
       _isSearching = true;
       fetcher.add(null);
     }
   }
 
-  notifyStopLoading() {
+  @override
+  notifyStopSearching() {
     if (_isSearching) {
       _isSearching = false;
       fetcher.add(null);
     }
   }
 }
-
-final userSearchBloc = UserSearchBloc();

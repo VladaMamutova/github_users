@@ -1,10 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:github_users/src/bloc/searcher.dart';
 import 'package:github_users/src/bloc/text_bloc.dart';
-import 'package:github_users/src/bloc/user_search_bloc.dart';
 
 class SearchBar extends StatefulWidget {
+  final Searcher searcher;
+
+  SearchBar(this.searcher);
+
   @override
   State<StatefulWidget> createState() {
     return SearchBarState();
@@ -18,7 +22,7 @@ class SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
+      alignment: Alignment.bottomCenter,
       child: StreamBuilder(
           stream: _searchTextBloc.textStream,
           builder: (context, AsyncSnapshot<String> textStream) {
@@ -59,13 +63,13 @@ class SearchBarState extends State<SearchBar> {
     }
 
     _searchTextBloc.updateText(text);
-    userSearchBloc.notifyLoading();
+    widget.searcher.notifyStartSearching();
     if (text.isEmpty) {
-      userSearchBloc.resetSearch();
-      userSearchBloc.notifyStopLoading();
+      widget.searcher.resetSearch();
+      widget.searcher.notifyStopSearching();
     } else {
       _debounce = Timer(const Duration(milliseconds: 500), () {
-        userSearchBloc.searchUsersByName(text);
+        widget.searcher.searchByName(text);
       });
     }
   }

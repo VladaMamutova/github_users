@@ -5,56 +5,37 @@ import 'package:github_users/src/model/user.dart';
 import 'package:github_users/src/model/users_model.dart';
 import 'package:github_users/src/ui/widgets/user_item.dart';
 
-class UserList extends StatefulWidget {
-  final Function(User) filter;
-  final _users = <User>[];
+abstract class UserList extends StatefulWidget {
+  final List<User> _users = <User>[];
+  final UserListBloc _userListBloc;
 
-  UserList(this.filter);
+  UserListBloc get userListBloc => _userListBloc;
+  bool get hasUsers => _users.isNotEmpty;
+  bool get hasNoUsers => _users.isEmpty;
 
-  @override
-  State<StatefulWidget> createState() {
-    return UserListState();
-  }
-}
+  UserList(this._userListBloc);
 
-class UserListState extends State<UserList> {
-  @override
-  Widget build(BuildContext context) {
-    // load users from an unfiltered list after switching tabs
-    widget._users.addAll(userListBloc.getFromUnfiltered(widget.filter));
-    if (widget._users.isEmpty) {
-      userListBloc.fetchUsers();
-    }
-
-    return StreamBuilder(
-        stream: userListBloc.filterUsers(widget.filter),
-        builder: (context, AsyncSnapshot<UsersModel> snapshot) {
-          if (snapshot.hasData || widget._users.isNotEmpty) {
-            return _buildContent(context, snapshot);
-          } else if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          } else {
-            return Center(child: CircularProgressIndicator(),);
-          }
-        }
-    );
+  addUsers(Iterable<User> users) {
+    _users.addAll(users);
   }
 
-  Widget _buildContent(BuildContext context, AsyncSnapshot snapshot) {
+  clear() {
+    _users.clear();
+  }
+
+  Widget buildUserList(BuildContext context, AsyncSnapshot<UsersModel> snapshot) {
     if (snapshot.hasData && snapshot.data.users.isNotEmpty) {
-      widget._users.addAll(snapshot.data.users);
+      addUsers(snapshot.data.users);
     }
 
     return Container(
         child: ListView.builder( // analog of RecyclerView in Android
-            itemCount: userListBloc.hasReachedMax
-                ? widget._users.length
-                : widget._users.length + 1,
+            itemCount: _userListBloc.allLoaded ? _users.length : _users.length + 1,
             itemBuilder: (BuildContext context, int index) {
-              if (index < widget._users.length) {
-                return UserItem(widget._users[index], index == 0);
+              if (index < _users.length) {
+                return UserItem(_users[index], index == 0);
               } else {
-                userListBloc.fetchUsers();
+                _userListBloc.loadUsers();
                 return Center(child: CircularProgressIndicator());
               }
             }
