@@ -20,16 +20,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c12bc92-080b-4be9-b7d7-79878a92dc4f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/src/bloc/searcher.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/bloc/user_catalog_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/ui/widgets/user_catalog.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/bloc/user_list_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/bloc/user_list_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/bloc/user_search_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/bloc/user_search_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/ui/pages/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/ui/pages/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/ui/pages/search_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/ui/pages/search_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/ui/widgets/search_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/ui/widgets/search_bar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/ui/widgets/user_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/ui/widgets/user_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/bloc/bloc_base.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/bloc_base.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/bloc/searcher.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/searcher.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/bloc/text_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/text_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/bloc/user_catalog_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/user_catalog_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/bloc/user_list_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/user_list_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/bloc/user_search_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/user_search_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/model/model_base.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/model/model_base.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/model/user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/model/user.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/model/users_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/model/users_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/resources/github_api_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/resources/github_api_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/resources/repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/resources/repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/ui/pages/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/ui/pages/search_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/search_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/ui/widgets/search_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/search_bar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/ui/widgets/search_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/search_card.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/ui/widgets/user_catalog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/user_catalog.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/ui/widgets/user_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/user_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/ui/widgets/user_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/widgets/user_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/widget_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +94,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\MyApplications\Android\github_users\lib" />
+      <recent name="D:\MyApplications\Android\github_users" />
       <recent name="D:\MyApplications\Android\github_users\lib\src\ui\widgets" />
       <recent name="D:\MyApplications\Android\github_users\lib\src\bloc" />
       <recent name="D:\MyApplications\Android\github_users\lib\src" />
@@ -71,7 +103,7 @@
   </component>
   <component name="RunManager">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" nameIsGenerated="true">
-      <option name="filePath" value="$PROJECT_DIR$/lib/src/main.dart" />
+      <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
     </configuration>
   </component>
@@ -101,6 +133,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614163298213">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1614163298213" />
     <state x="426" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1613157010530">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -125,22 +161,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1613071102562" />
-    <state width="1323" height="369" key="GridCell.Tab.0.bottom" timestamp="1613952101255">
+    <state width="1323" height="235" key="GridCell.Tab.0.bottom" timestamp="1614162870550">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="369" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613952101255" />
-    <state width="1323" height="369" key="GridCell.Tab.0.center" timestamp="1613952101255">
+    <state width="1323" height="235" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1614162870550" />
+    <state width="1323" height="235" key="GridCell.Tab.0.center" timestamp="1614162870550">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="369" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1613952101255" />
-    <state width="1323" height="369" key="GridCell.Tab.0.left" timestamp="1613952101232">
+    <state width="1323" height="235" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1614162870550" />
+    <state width="1323" height="235" key="GridCell.Tab.0.left" timestamp="1614162870550">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="369" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1613952101232" />
-    <state width="1323" height="369" key="GridCell.Tab.0.right" timestamp="1613952101255">
+    <state width="1323" height="235" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1614162870550" />
+    <state width="1323" height="235" key="GridCell.Tab.0.right" timestamp="1614162870550">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="369" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1613952101255" />
+    <state width="1323" height="235" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1614162870550" />
     <state x="163" y="0" key="SettingsEditor" timestamp="1613070973251">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
