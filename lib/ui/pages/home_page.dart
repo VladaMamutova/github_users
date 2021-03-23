@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:github_users/bloc/user_catalog_bloc.dart';
-import 'package:github_users/bloc/user_search_bloc.dart';
-import 'package:github_users/model/user.dart';
 import 'package:github_users/ui/pages/search_page.dart';
 import 'package:github_users/ui/widgets/search_card.dart';
 import 'package:github_users/ui/widgets/user_catalog.dart';
@@ -12,22 +9,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  UserCatalogBloc _userCatalogBloc = UserCatalogBloc();
-  UserSearchBloc _userSearchBloc = UserSearchBloc();
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      child: new Scaffold(
+      child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(169),
-          child: new AppBar(
+          child: AppBar(
             backgroundColor: Colors.white,
-            brightness: Brightness.light, // the values in the status bar are dark
-            flexibleSpace: new Container(
-              margin: const EdgeInsets.only(left: 12, top: 40, right: 12),
+            brightness: Brightness.light,
+            // the values in the status bar are dark
+            flexibleSpace: Container(
+              margin: const EdgeInsets.only(
+                left: 12,
+                top: 40,
+                right: 12,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -36,10 +35,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline5,
                   ),
-                  SizedBox(height: 8),
-                  SearchCard(onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => SearchPage(_userSearchBloc)));
+                  SizedBox(
+                    height: 8,
+                  ),
+                  SearchCard(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SearchPage(),
+                        ),
+                      );
                     },
                   ),
                   SizedBox(height: 8),
@@ -48,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     labelColor: Color(0xff2D2727),
                     labelStyle: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18
+                      fontSize: 18,
                     ),
                     tabs: [
                       Tab(text: "A - H"),
@@ -62,11 +67,21 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         body: TabBarView(
-            children: [
-              UserCatalog(_userCatalogBloc, User.filterFromAtoH),
-              UserCatalog(_userCatalogBloc, User.filterFromItoP),
-              UserCatalog(_userCatalogBloc, User.filterFromQtoZ),
-            ]),
+          children: [
+            UserCatalog(
+              fromLetter: 'a',
+              toLetter: 'h',
+            ),
+            UserCatalog(
+              fromLetter: 'i',
+              toLetter: 'p',
+            ),
+            UserCatalog(
+              fromLetter: 'q',
+              toLetter: 'z',
+            ),
+          ],
+        ),
       ),
     );
   }
