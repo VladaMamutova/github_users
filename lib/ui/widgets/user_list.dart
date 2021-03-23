@@ -1,45 +1,51 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:github_users/bloc/user_list_bloc.dart';
 import 'package:github_users/model/user.dart';
-import 'package:github_users/model/users_model.dart';
 import 'package:github_users/ui/widgets/user_item.dart';
 
-abstract class UserList extends StatefulWidget {
-  final List<User> _users = <User>[];
-  final UserListBloc _userListBloc;
+class UserList extends StatelessWidget {
+  final List<User>? users;
+  final VoidCallback? onScrollToBottom;
+  final bool loading;
 
-  UserListBloc get userListBloc => _userListBloc;
-  bool get hasUsers => _users.isNotEmpty;
-  bool get hasNoUsers => _users.isEmpty;
+  const UserList({
+    Key? key,
+    this.users,
+    this.loading = false,
+    this.onScrollToBottom,
+  }) : super(key: key);
 
-  UserList(this._userListBloc);
-
-  addUsers(Iterable<User> users) {
-    _users.addAll(users);
-  }
-
-  clear() {
-    _users.clear();
-  }
-
-  Widget buildUserList(BuildContext context, AsyncSnapshot<UsersModel> snapshot) {
-    if (snapshot.hasData && snapshot.data.users.isNotEmpty) {
-      addUsers(snapshot.data.users);
+  @override
+  Widget build(BuildContext context) {
+    if (users == null) {
+      return Container();
     }
 
+    final usersCount = users?.length ?? 0;
+
     return Container(
-        child: ListView.builder( // analog of RecyclerView in Android
-            itemCount: _userListBloc.allLoaded ? _users.length : _users.length + 1,
-            itemBuilder: (BuildContext context, int index) {
-              if (index < _users.length) {
-                return UserItem(_users[index], index == 0);
-              } else {
-                _userListBloc.loadUsers();
-                return Center(child: CircularProgressIndicator());
-              }
+      child: NotificationListener<ScrollEndNotification>(
+        onNotification: (scrollEnd) {
+          // atEdge returns when we scroll to some edge - top or bottom
+          // we will take only the bottom one
+          if (scrollEnd.metrics.atEdge && scrollEnd.metrics.pixels > 0) {
+            onScrollToBottom?.call();
+          }
+          return true;
+        },
+        child: ListView.builder(
+          itemCount: loading ? usersCount + 1 : usersCount,
+          itemBuilder: (context, index) {
+            if (index < usersCount) {
+              return UserItem((users ?? [])[index], index == 0);
             }
-        )
+
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        ),
+      ),
     );
   }
 }
