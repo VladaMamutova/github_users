@@ -1,70 +1,78 @@
 import 'dart:convert';
-import 'package:github_users/model/users_model.dart';
+import 'package:github_users/model/search_users_response.dart';
+import 'package:github_users/model/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+final clientId = env['GITHUB_CLIENT_ID'];
+final clientSecret = env['GITHUB_CLIENT_SECRET'];
+
 class GitHubApiProvider {
-  static const URL = 'https://api.github.com';
-  static const SUCCESS_CODE = 200;
-  static const USERS_PER_PAGE = 15;
-  static const SEARCH_USERS_PER_PAGE = 5;
+  static const url = 'https://api.github.com';
+  static const successCode = 200;
+  static const usersPerPage = 30;
+  static const searchUsersPerPage = 10;
 
   // A Future is used to represent a potential value, or error,
   // that will be available at some time in the future (analog of Optional in Kotlin).
-  Future<UsersModel> fetchUsers(int startId, {int perPage = USERS_PER_PAGE}) async {
-    var oauthString = env['GITHUB_CLIENT_ID']+ ':' + env['GITHUB_CLIENT_SECRET'];
-    var oauthInBase64 = base64.encode(utf8.encode(oauthString));
-    var headers = {'Authorization': 'Basic ' + oauthInBase64,
-      'Accept': 'application/vnd.github.v3+json'};
+  Future<List<User>> fetchUsers(
+    int startId, {
+    int perPage = usersPerPage,
+  }) async {
     final response = await http.get(
-        '$URL/users?per_page=$perPage&since=$startId', headers: headers);
+      Uri.parse('$url/users?per_page=$perPage&since=$startId'),
+      headers: _headers(),
+    );
 
-    if (response.statusCode == SUCCESS_CODE) {
-      final usersModel = UsersModel.fromJson(json.decode(response.body));
-      var index = 0;
-      for (var user in usersModel.users) {
+    if (response.statusCode == successCode) {
+      final users = (json.decode(response.body) as List)
+          .map((json) => User.fromJson(json))
+          .toList();
+      for (var user in users) {
         final userResponse = await http.get(
-            '$URL/users/${user.login}', headers: headers);
+          Uri.parse('$url/users/${user.login}'),
+          headers: _headers(),
+        );
 
-        if (userResponse.statusCode == SUCCESS_CODE) {
+        if (userResponse.statusCode == successCode) {
           final jsonBody = json.decode(userResponse.body);
           user.name = jsonBody['name'] ?? user.login;
           user.followers = jsonBody['followers'];
           user.following = jsonBody['following'];
-
-          if (index == usersModel.users.length - 1) {
-            usersModel.lastId = jsonBody['id']; // save the last fetched id
-          }
         }
-
-        ++index;
       }
 
-      return usersModel;
-    } else {
-      throw Exception('Failed to load users (status code: ${response.statusCode}): '
-          '${json.decode(response.body)['message']}');
+      return users;
     }
+
+    throw Exception(
+      'Failed to load users (status code: ${response.statusCode}): '
+      '${json.decode(response.body)['message']}',
+    );
   }
 
-  Future<UsersModel> searchUsersByName(String name, int page,
-      {int perPage = SEARCH_USERS_PER_PAGE}) async {
-    var oauthString = env['GITHUB_CLIENT_ID']+ ':' + env['GITHUB_CLIENT_SECRET'];
-    var oauthInBase64 = base64.encode(utf8.encode(oauthString));
-    var headers = {'Authorization': 'Basic ' + oauthInBase64,
-      'Accept': 'application/vnd.github.v3+json'};
+  Future<SearchUserResponse> searchUsersByName(
+    String name,
+    int page, {
+    int perPage = searchUsersPerPage,
+  }) async {
     final response = await http.get(
-        '$URL/search/users?q=$name&per_page=$perPage&page=$page', headers: headers);
+      Uri.parse('$url/search/users?q=$name&per_page=$perPage&page=$page'),
+      headers: _headers(),
+    );
 
-    if (response.statusCode == SUCCESS_CODE) {
-      final jsonResponse = json.decode(response.body);
-      final usersModel = UsersModel.fromJson(jsonResponse['items']);
-      usersModel.totalResults = jsonResponse['total_count'];
-      for (var user in usersModel.users) {
+    if (response.statusCode == successCode) {
+      final searchResponse = SearchUserResponse.fromJson(
+        json.decode(response.body),
+      );
+
+      for (var user in searchResponse.items) {
         final userResponse = await http.get(
-            '$URL/users/${user.login}', headers: headers);
+          Uri.parse('$url/users/${user.login}'),
+          headers: _headers(),
+        );
 
-        if (userResponse.statusCode == SUCCESS_CODE) {
+        if (userResponse.statusCode == successCode) {
           final jsonBody = json.decode(userResponse.body);
           user.name = jsonBody['name'] ?? user.login;
           user.followers = jsonBody['followers'];
@@ -72,10 +80,20 @@ class GitHubApiProvider {
         }
       }
 
-      return usersModel;
-    } else {
-      throw Exception('Failed to search users (status code: ${response.statusCode}): '
-          '${json.decode(response.body)['message']}');
+      return searchResponse;
     }
+    throw Exception(
+      'Failed to search users (status code: ${response.statusCode}): '
+      '${json.decode(response.body)['message']}',
+    );
+  }
+
+  Map<String, String> _headers() {
+    var oauthString = '$clientId:$clientSecret';
+    var oauthInBase64 = base64.encode(utf8.encode(oauthString));
+    return {
+      'Authorization': 'Basic ' + oauthInBase64,
+      'Accept': 'application/vnd.github.v3+json'
+    };
   }
 }
