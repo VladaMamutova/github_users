@@ -1,43 +1,68 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:github_users/bloc/user_catalog_bloc.dart';
-import 'package:github_users/model/user.dart';
-import 'package:github_users/model/users_model.dart';
-import 'package:github_users/ui/widgets/user_list.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:github_users/bloc/user_catalog_cubit.dart' as cubit;
+import 'package:github_users/resources/repository.dart';
+import 'package:github_users/util/list_util.dart';
+import 'package:provider/provider.dart';
 
-class UserCatalog extends UserList {
-  final Function(User) filter;
+import 'user_list.dart';
 
-  UserCatalog(UserCatalogBloc userCatalogBloc, this.filter) : super(userCatalogBloc);
+class UserCatalog extends StatefulWidget {
+  final String? fromLetter;
+  final String? toLetter;
+
+  UserCatalog({
+    this.fromLetter,
+    this.toLetter,
+  });
 
   @override
-  State<StatefulWidget> createState() {
-    return UserCatalogState();
-  }
+  createState() => UserCatalogState();
 }
 
-class UserCatalogState extends State<UserCatalog> {
+class UserCatalogState extends State<UserCatalog>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
-    final userCatalogBloc = widget.userListBloc as UserCatalogBloc;
-
-    // load users from an unfiltered list after switching tabs
-    widget.addUsers(userCatalogBloc.getFromUnfiltered(widget.filter));
-    if (widget.hasNoUsers) {
-      userCatalogBloc.fetchUsers();
-    }
-
-    return StreamBuilder(
-        stream: userCatalogBloc.filterUsers(widget.filter),
-        builder: (context, AsyncSnapshot<UsersModel> snapshot) {
-          if (snapshot.hasData || widget.hasUsers) {
-            return widget.buildUserList(context, snapshot);
-          } else if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          } else {
-            return Center(child: CircularProgressIndicator(),);
+    super.build(context);
+    return BlocProvider<cubit.UserCatalogCubit>(
+      create: (c) => cubit.UserCatalogCubit(
+        fromLetter: widget.fromLetter,
+        toLetter: widget.toLetter,
+        repository: context.read<Repository>(),
+      )..onScreenOpened(),
+      child: BlocBuilder<cubit.UserCatalogCubit, cubit.UserCatalogState>(
+        builder: (context, state) {
+          if (state.loading == true && nullOrEmpty(state.users)) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }
-        }
+
+          if (state.users?.isNotEmpty == true) {
+            return UserList(
+              users: state.users,
+              loading: (state.loading ?? false) && !nullOrEmpty(state.users),
+              onScrollToBottom:
+                  context.read<cubit.UserCatalogCubit>().onScrolledToBottom,
+            );
+          }
+
+          if (state.users?.isEmpty == true) {
+            return Text('There are no users.');
+          }
+
+          if (state.error != null && state.error?.isNotEmpty == true) {
+            return Text(state.error ?? '');
+          }
+
+          return Container();
+        },
+      ),
     );
   }
 }
