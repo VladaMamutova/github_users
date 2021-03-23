@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SearchCard extends StatelessWidget {
-  final TapCallback onTap;
+  final VoidCallback? onTap;
 
   SearchCard({this.onTap});
 
@@ -17,16 +17,26 @@ class SearchCard extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           child: Padding(
-            padding: EdgeInsets.only(left: 12, right: 12),
+            padding: EdgeInsets.only(
+              left: 12,
+              right: 12,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Text("Search user",
-                    style: TextStyle(fontSize: 18, color: Color(0xff757575),),
+                  child: Text(
+                    "Search user",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xff757575),
+                    ),
                   ),
                 ),
-                Icon(Icons.search, color: Color(0xff757575),)
+                Icon(
+                  Icons.search,
+                  color: Color(0xff757575),
+                )
               ],
             ),
           ),
@@ -35,5 +45,3 @@ class SearchCard extends StatelessWidget {
     );
   }
 }
-
-typedef TapCallback = void Function();
